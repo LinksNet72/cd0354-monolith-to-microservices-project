@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import {sequelize} from './sequelize';
 
 import {IndexRouter} from './controllers/v0/index.router';
@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import {config} from './config/config';
 import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
 
+const c = config.dev;
 
 (async () => {
   await sequelize.addModels(V0_FEED_MODELS);
@@ -38,14 +39,14 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
   app.use('/api/v0/', IndexRouter);
 
   // Root URI call
-  app.get( '/', async ( req, res ) => {
+  app.get( '/', async ( req : Request, res : Response ) => {
     res.send( '/api/v0/' );
   } );
 
 
   // Start the Server
   app.listen( port, () => {
-    console.log( `server running ${config.url}` );
+    console.log( `server running ${c.url}` );
     console.log( `press CTRL+C to stop server` );
   } );
 })();
