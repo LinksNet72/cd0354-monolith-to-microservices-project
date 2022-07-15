@@ -8,14 +8,14 @@ spec:
   selector:
     matchLabels:
       service: backend-user
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         service: backend-user
     spec:
       containers:
-      - image: kayfield/udagram-api-user
+      - image: kayfield/udagram-api-user:v1
         name: backend-user
         imagePullPolicy: Always          
         resources:
